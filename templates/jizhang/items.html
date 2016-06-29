@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}
+<title></title>
+{%endblock%}
+{%block content%}
+{%include 'welcome.html'%}
+<div class="btn-group btn-group-justified" role="group">
+    <a href="{%url 'jizhang:new_item'%}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+    <a href="" class="btn btn-primary"><span class="glyphicon glyphicon-download"></span> 导出</a>
+    <a href="" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> 导入</a>
+    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+</div>
+<form action="" method="post">
+    {% csrf_token%}
+    <div class="table-response">
+        <table class="table table-hover">
+                <tr class="info">
+                    <td><strong>金额</strong></td>
+                    <td><strong>日期</strong></td>
+                    <td><strong>分类</strong></td>
+                    <td><strong>备注</strong></td>
+                    <td><strong><input type="checkbox" name="check_all" value="True" id="all" >全选</strong></td>
+                </tr>
+            {% if items %}
+            {%for i in items%}
+                <tr class="{% cycle '' 'active' %}">
+                    <td data-toggle="tooltip" data-placement="right" title="编辑该内容"><a href="{{i.get_item_url}}">{{i.price}}</a></td>
+                    <td>{{i.pub_date}}</td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.comment}}</td>
+                    <td><input type="checkbox" value="{{i.id}}" class="del_id" name="checkbox"></td>
+                </tr>
+            {% endfor %}
+            {%else %}
+                <tr><td><strong>没有账单，开始记账吧</strong></td></tr>
+            {%endif%}
+        </table>
+    <nav>
+        <ul class="pager">
+                    <li>
+                    {% if items.has_previous %}
+                    <a href="?page={{items.previous_page_number}}" aria-label="上一页">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                    <li><a href="">{{items.number}}</a></li>
+                    <li>
+                    {% if items.has_next %}
+                    <a href="?page={{items.next_page_number}}" aria-label="下一页">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+        </ul>
+    </nav>
+    </div>
+{% include 'jizhang/delete-modal.html'%}
+</form>
+{% include 'jizhang/foot_botton.html' %}
+{%endblock%}
+
+{%block extra_script%}
+<script>
+    $(function () {
+        $("#all").click(function () {
+            var checked_status = this.checked;
+            $(".del_id").each(function () {
+                this.checked = checked_status;
+            });
+        });
+    });
+</script>
+{% endblock%}

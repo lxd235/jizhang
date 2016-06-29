@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{%block title%}
+<title>register</title>
+{%endblock%}
+{%block content%}
+                <h2 class="text-center">注册成为我们的一员吧</h2>
+                <p>
+                {%if form.non_field_errors %}
+                {{form.non_field_errors}}
+                {%endif%}
+                </p>
+        <form action="" method="post" >
+                {%csrf_token%}
+                <div class="form-group ">
+                            <label for="id_username" >用户名</label>
+                            {{form.username.errors}}               
+                            {{form.username}}                              
+                </div>
+                <div class="form-group ">
+                            <label for="id_password" >密码</label>
+                            {{form.password.errors}}               
+                            {{form.password}}                              
+                </div>
+                <div class="form-group ">
+                            <label for="id_password_confirm" >密码(Again)</label>
+                            {{form.password_confirm.errors}}               
+                            {{form.password_confirm}}                              
+                </div>
+                <div class="form-group ">
+                            <label for="id_email" >Email</label>
+                            {{form.email.errors}}               
+                            {{form.email}}                              
+                </div>
+                <div class="form-group ">
+                    <input type="submit" name="submit" value="注册" class="btn btn-default">
+                    <button type="button"  class="btn btn-default" onclick='javascript:window.location.href="{% url 'accounts:login' %}"'>登录</button>
+                </div>
+        </form>
+{%endblock%}
+{%include 'footer.html'%}

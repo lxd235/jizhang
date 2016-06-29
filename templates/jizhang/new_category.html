@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}
+<title>new category</title>
+{%endblock%}
+{%block content%}
+{% include 'welcome.html'%}
+<form action="" method="post">
+    {% csrf_token %}
+      <div class="form-group">
+          <label for="id_username" >分类名</label>
+             {{form.name.errors}}
+             {{form.name}}
+      </div>
+      <div class="form-group">
+              <label for="id_p_category" >上级分类</label> 
+              {{form.p_category.errors}}
+              {{form.p_category}}         
+      </div>
+      <div class="checkbox">
+          <label>
+             {{form.isincome.errors}}
+             {{form.isincome}}是否是收入
+          </label>
+      </div>
+      <input class="btn btn-default" type="submit" value="提交" >
+      <a class="btn btn-default" href="{% url 'jizhang:items' %}" role="button">返回</a>
+</form>
+{%endblock%}

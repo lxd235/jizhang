@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}
+<title>categories</title>
+{%endblock%}
+{%block content%}
+{%block extrahead%}
+{%endblock%}
+{%include 'welcome.html'%}
+
+<div class="btn-group btn-group-justified" role="group">
+    <a href="{%url 'jizhang:new_category'%}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+    <a href="" class="btn btn-primary"><span class="glyphicon glyphicon-download"></span> 导出</a>
+    <a href="" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> 导入</a>
+    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#myModal" id="submit"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+</div>
+<form action="" method="post" name="category">
+    {% csrf_token %}
+<div class="table-response ">
+    <table class="table table-hover">
+            <tr class="info">
+                <td><strong>类别名称</strong></td>
+                <td><strong>所属用户</strong></td>
+                <td><strong>上级分类</strong></td>
+                <td><strong>是否是收入</strong></td>
+                <td><strong><input type="checkbox" name="check_all" value="True" id="all" >全选</strong></td>
+                    
+            </tr>
+        {%for i in categories%}
+            <tr class="{% cycle '' 'active' %}">
+                <td data-toggle="tooltip" data-placement="right" title="编辑该分类"><a href="{{i.get_absolute_url}}">{{i.leve}}{{i.name}}</a></td>
+                <td>{{i.user}}</td>
+                <td>{{i.p_category}}</td>
+                <td>{{i.get_isincome_display}} </td>
+                <td><input type="checkbox" value="{{i.id}}" class="del_id" name="checkbox"></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <nav>
+    <ul class="pager">
+                <li>
+                {% if categories.has_previous %}
+                <a href="?page={{categories.previous_page_number}}" aria-label="上一页">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                {% endif %}
+                </li>
+                <li><a href="">{{categories.number}}</a></li>
+                <li>
+                {% if categories.has_next %}
+                <a href="?page={{categories.next_page_number}}" aria-label="下一页">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                {% endif %}
+                </li>
+    </ul>
+    </nav>   
+</div>
+{% include 'jizhang/delete-modal.html'%}    
+</form>
+{%include 'jizhang/foot_botton.html'%}
+
+{%endblock%}
+{%block extra_script%}
+<script>
+    $(function () {
+        $("#all").click(function () {
+            var checked_status = this.checked;
+            $(".del_id").each(function () {
+                this.checked = checked_status;
+            });
+        });
+    });
+</script>
+{% endblock%}

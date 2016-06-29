@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%block title%}
+<title>login</title>
+{%endblock%}
+{%block content%}
+        <h1 class="text-center">爱生活，爱记账</h1>
+         {%if form.non_field_errors %}
+            {%for errors_string in form.non_field_errors%}
+            <p>{{errors_string}}</p>
+            {%endfor%}
+         {%endif%}
+        <form action="" method="post" >
+                {% csrf_token%}
+                        <div class="form-group ">
+                            <label for="id_username" >用户名</label>
+                               {{form.username.errors}}
+                               {{form.username}}
+                        </div>
+                        <div class="form-group ">
+                            <label for="id_password" >密码</label>
+                               {{form.password.errors}}
+                               {{form.password}}
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-default" >登录</button>
+                            <button type="button" class="btn btn-default" onclick='javascript:window.location.href="{% url 'accounts:register' %}"'>注册</button>
+                        </div>
+        </form>
+        <h3> 在这里你可以</h3>
+        <ul>
+            <li>随时随地通过网络记账</li>
+            <li>统计分析自己每月收支</li>
+            <li>导出表格进行备份</li>
+            <li>导入以前记录的表格</li>
+        </ul>
+
+{%endblock%}

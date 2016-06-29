@@ -1,0 +1,35 @@
+{% load static from staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
+{%block title%}        
+<title>爱记账</title>
+{%endblock%}
+{%block extrahead%}
+{%endblock%}
+</head>
+<body>
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
+                <div class='col-xs-10 col-sm-8 col-md-8 col-lg-6'>
+                    {% block content %}
+                    {% endblock %}
+                    {%include 'footer.html'%}
+                </div> 
+                <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
+            </div>
+    </div> 
+            <script src="{%static 'bootstrap/js/jquery-3.0.0.min.js'%}"></script>
+            <script src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+            <script src="{%static 'bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js'%}"></script>
+            <script src="{%static 'bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js'%}"></script>
+{%block extra_script%}
+{% endblock%}
+</body>
+</html>
