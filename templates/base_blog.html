@@ -1,0 +1,51 @@
+{% load static from staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="icon" href="../../favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'css/blog.css'%}" />
+    {%block title%}        
+    <title>博客首页</title>
+    {%endblock%}
+    {%block extrahead%}
+    {%endblock%}
+  </head>
+<body>
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#about">文章</a></li>
+            <li><a href="#contact">记账</a></li>
+            <li><a href="#contact">留言区</a></li>
+            {%if request.user.is_staff %}<li><a href="#contact">写作</a></li>{% endif %}
+          </ul>
+          <p class="navbar-text navbar-right" >
+            {% if request.user.is_authenticated %}
+            {{request.user.username}}<a href="{%url 'accounts:logout'%}" class="navbar-link"><strong> ,注销</strong></a>
+            {% else %}
+            <a href="{% url 'accounts:login'%}" class="navbar-link"><strong>登录</strong></a>
+            {% endif %}
+          </p>
+    </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+      {% block main-left%}
+      {% endblock %}
+    </div>
+    <div class="col-xs-6 col-md-4">
+      {% block main-right%}
+      {% endblock %}
+    </div>
+  </div>
+</div>
+</body>
+</html>

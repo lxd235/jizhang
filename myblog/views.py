@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 
 def home(request):
-    pass
+    return render(request,'blog/index.html')

@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     #items
     url(r'^$',views.home,name='home'),
-    #category
+    
+    #catergory
 
 )
