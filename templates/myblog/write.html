@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="pael panel-dafault">
+    <form action="" method="post">
+        {%csrf_token%}
+            <div class="form-group">
+                <label for="id_title">标题</label>
+                {{form.title}}
+            </div>
+            <div class="form-group">
+                <label for="id_content">内容</label>
+                {{form.media}}
+                {{form.content}}
+            </div>
+            <div class="check-box">
+                <label for="id_p_category">分类</label>
+                {{form.category}}
+            </div>
+        <input type="submit" value="提交" class="btn btn-success">
+        <a href="{% url 'myblog:home'%}" class="btn btn-default">返回</a>
+    </form>
+</div>
+{% endblock%}

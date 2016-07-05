@@ -1,0 +1,48 @@
+{%extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  {%for article in articles %}
+    <div class="panel panel-{% cycle 'default' 'info'%}">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{article.title}}</h3>
+      </div>
+      <div class="panel-body">
+        {{ article.content|slice:"100"|safe }}......
+      </div>
+      <div class="panel-footer">
+        创建于：{{article.write_date}},最后修改于：{{article.change_date}}
+        <a href="{{article.get_absolute_url}}" >[阅读全文]</a>
+      </div>
+    </div>
+  {% endfor %}
+  <nav>
+        <ul class="pager">
+          <p class="text-center">共{{articles.paginator.num_pages}}页</p>
+                    <li>
+                    {% if articles.has_previous %}
+                    <a href="?page={{articles.previous_page_number}}" aria-label="上一页">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                    <li><a href="">{{articles.number}}</a></li>
+                    <li>
+                    {% if articles.has_next %}
+                    <a href="?page={{articles.next_page_number}}" aria-label="下一页">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+        </ul>
+    </nav>
+{% endblock %}
+{%block main-right%}
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item">
+          <span class="badge">14</span>
+          Cras justo odio
+        </li>
+    </ul>
+</div>
+{%endblock%}

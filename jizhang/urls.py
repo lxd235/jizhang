@@ -3,8 +3,8 @@ from jizhang import views
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    #items
+urlpatterns =[
+    #item
     url(r'^$',views.items,name='items'),
     url(r'^(?P<pk>\d+)/edit/$',views.edit_item,name='edit_item'),
     url(r'^new/$',views.new_item,name='new_item'),
@@ -15,4 +15,4 @@ urlpatterns = patterns('',
     url(r'^category/new/$',views.new_category, name='new_category'),
     #ajax
     url(r'^ajax/autocomplete_comments/',views.autocomplete_comments),
-)
+]

@@ -17,7 +17,7 @@ def index(request):
         return  render(request,'accounts/index.html',{'username':username})
 def accounts_logout(request):
         logout(request)
-        return  render(request,'accounts/logout.html')
+        return  HttpResponseRedirect('/myblog/')
 def  accounts_login(request):
                 if request.method=='POST':
                         form=Login_forms(request.POST)
@@ -28,7 +28,7 @@ def  accounts_login(request):
                                 if user :
                                         if user.is_active:
                                                 login(request,user)
-                                                return HttpResponseRedirect('/jizhang/')
+                                                return HttpResponseRedirect('/myblog/')
                                         else:
                                                 return HttpResponse('your password in valid,but the account has been disable')
                                 else:
@@ -50,7 +50,7 @@ def register(request):
                         user1 = authenticate(username=username,password=password)
                         login(request,user1)
                         auto_gen_categories(user)
-                        return HttpResponseRedirect('/jizhang/')
+                        return HttpResponseRedirect('/myblog/')
                 else:
                         return  render(request,'accounts/register.html',{'form':form})
         form=Register_forms()
