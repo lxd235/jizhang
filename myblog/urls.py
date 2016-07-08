@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^article/(?P<id>\d+)/$',views.article,name='article'),
     url(r'^article/(?P<page>\d+)/edit/$',views.edit_article,name='edit_article'),
     
+    
     #catergory
 
 ]

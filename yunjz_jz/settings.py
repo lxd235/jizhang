@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'jizhang',
     'myblog',
     'ckeditor',
+    'django.contrib.sites',
+    'django_comments',
 ]
 
 MIDDLEWARE_CLASSES = [

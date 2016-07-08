@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls',namespace='accounts')),
     url(r'^jizhang/', include('jizhang.urls',namespace='jizhang')),
     url(r'^myblog/', include('myblog.urls',namespace='myblog')),
+    url(r'^comments/', include('django_comments.urls',namespace='comments')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

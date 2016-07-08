@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    评论列表
+  </div>
+<div class="panel-body">
+    <form action="" method="post" onsubmit="return valid_form()">
+        {% csrf_token %}
+        <textarea class="form-control" rows="3"placeholder="请在这里输入评论，最多200字" id="id_comment" name="comment_to_me"></textarea>
+        <input type="submit" value="提交" class="btn btn-default" id="submit_comment_to_me" >
+    </form>
+  </div>
+  <div class="panel-body">
+    {% for i in comment_list %}
+    <div class="panel panel-{% cycle 'info' 'default' %}">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>{{i.user}}</strong>于{{i.comment_date}}评价:</h3>
+      </div>
+      <div class="panel-body">
+      {{i.content|safe}}
+      </div>
+  </div>
+    {% endfor %}
+</div>
+  <nav>
+        <ul class="pager">
+          <p class="text-center">共{{comment_list.paginator.num_pages}}页</p>
+                    <li>
+                    {% if comment_list.has_previous %}
+                    <a href="?page={{comment_list.previous_page_number}}" aria-label="上一页">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+                    <li><a href="">{{comment_list.number}}</a></li>
+                    <li>
+                    {% if comment_list.has_next %}
+                    <a href="?page={{comment_list.next_page_number}}" aria-label="下一页">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    {% endif %}
+                    </li>
+        </ul>
+    </nav>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="mymodal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <h3>你还么有权限，请先<a href="/accounts/login" >登录</a></h3>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_script %}
+<script>
+  $('#id_comment').click(function(){
+    if ('{{request.user.is_authenticated}}'!='True'){
+      $('#mymodal').modal()
+    }
+  });
+  function valid_form(){
+    var value=$('#id_comment').val();
+    if (value==null||value==""){
+      alert('提交内容不能为空')
+      return false
+  };    
+  }
+</script>
+{% endblock%}
+

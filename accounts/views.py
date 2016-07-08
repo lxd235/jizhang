@@ -10,7 +10,7 @@ from jizhang.func_lib import auto_gen_categories
 
 # Create your views here.
 def index0(request):
-        return HttpResponseRedirect('/accounts/login')
+        return HttpResponseRedirect('/myblog/')
 @login_required
 def index(request):
         username=request.user.username

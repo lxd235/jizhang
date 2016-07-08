@@ -16,3 +16,4 @@ class Article_form(forms.ModelForm):
         self.fields['title'].widget=forms.TextInput(attrs={'class':'form-control'})
         choices=[('','----')]+[(i.id,i) for i in get_result()]
         self.fields['category'].widget=forms.Select(choices=choices,attrs={'class':'form-control'})
+
